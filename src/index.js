@@ -11,9 +11,9 @@ playButton.addEventListener('click', (e) => {
 
 const audio = new Audio('./assets/440.wav');
 
-const SHORT_TIME = 100;
-const LONG_TIME = 300;
-const WORD_SPACE_TIME = 700;
+const SHORT_TIME = 50;
+const LONG_TIME = 150;
+const WORD_SPACE_TIME = 350;
 
 const short = () => {
   audio.play();
@@ -89,23 +89,26 @@ const playPhrase = async (phrase) => {
   code = '';
   let words = phrase.toUpperCase().split(' ');
 
+  let first = true;
   for (let word of words) {
+    if (!first) 
+      code += ' / ';
+    
+    first = false;
     let letters = word.split('');
     for (let letter of letters) {
       if (!morse[letter]) continue;
-      code += `${letter}: `;
       let letterCode = morse[letter];
       for (let fn of letterCode) {
         await fn();
         await pause(SHORT_TIME);
       }
-      code += '\n';
+      code += '&nbsp;&nbsp;';
       await pause(LONG_TIME);
       continue;
     }
-    code += '\n\n';
     await pause(WORD_SPACE_TIME);
   }
 
-  codeDiv.textContent = code;
+  codeDiv.innerHTML = code;
 }
