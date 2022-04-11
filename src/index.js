@@ -17,7 +17,7 @@ const WORD_SPACE_TIME = 350;
 
 const short = () => {
   audio.play();
-  code += ' .';
+  code += '&nbsp;.';
   return new Promise(resolve => {
     setTimeout(() => {
       stop(audio);
@@ -28,7 +28,7 @@ const short = () => {
 
 const long = () => {
   audio.play();
-  code += ' _';
+  code += '&nbsp;_';
   return new Promise(resolve => {
     setTimeout(() => {
       stop(audio);
@@ -92,7 +92,7 @@ const playPhrase = async (phrase) => {
   let first = true;
   for (let word of words) {
     if (!first) 
-      code += ' / ';
+      code += '&nbsp;&nbsp;/&nbsp;&nbsp;';
     
     first = false;
     let letters = word.split('');
